@@ -1,5 +1,4 @@
 Wathclist::Application.routes.draw do
-  devise_for :admins
 	scope '(:locale)', locale: /en|uk/ do
   	resources :genres
 
