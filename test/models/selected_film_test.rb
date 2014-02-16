@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SelectedFilmTest < ActiveSupport::TestCase
   test "the truth" do
-  	s = SelectedFilm.new(wathed: false, user_id: User.first, film_id: Film.first)
+  	s = SelectedFilm.new(watched: false, user_id: User.first, film_id: Film.first)
   	s.save
   	f = Film.new(title: "Jango", year: 2013, genre_id: Genre.first, ratings: 10, discription: "asldfhjaasd;akjsdfj")
   	f.save

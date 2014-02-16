@@ -1,27 +1,39 @@
-<h1>Listing genres</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @genres.each do |genre| %>
-      <tr>
-        <td><%= genre.name %></td>
-        <td><%= link_to 'Show', genre %></td>
-        <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
-        <td><%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="page-header">
+ <%if current_user.try(:admin?)%>
+    <%= link_to new_genre_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      New Genre
     <% end %>
-  </tbody>
-</table>
+  <%end%>
+  <h1>Genres:</h1>
+</div>
 
-<br>
+<div class="table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <%if current_user%>
+          <%if current_user.admin?%>
+            <th></th>
+            <th></th>
+          <%end%>
+        <%end%>
+      </tr>
+    </thead>
 
-<%= link_to 'New Genre', new_genre_path %>
+    <tbody>
+      <%= content_tag_for(:tr, @genres) do |genre| %>
+        <td><%= link_to genre.name, genre %></td>
+        <%if current_user%>
+          <%if current_user.admin?%>
+            <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
+            <td><%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%end%>
+        <%end%>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

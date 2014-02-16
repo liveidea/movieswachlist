@@ -1,29 +1,76 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
 
-<p>
-  <strong>Title:</strong>
-  <%= @film.title %>
-</p>
+  <%= link_to films_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_film_path(@film), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+    <%=link_to "Next film", @film.next, class: "btn btn-primary"%>
+    <%=link_to "Prev film", @film.prev, class: "btn btn-primary"%>
+  <% end %>
+  <h2><%= @film.title%></h2>
+</div>
 
-<p>
-  <strong>Year:</strong>
-  <%= @film.year %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <strong><%= t("film.title")%></strong>  
+    <%= @film.title %><br>
+    <strong><%= t("film.year")%></strong>
+    <%= @film.year %><br>
+    <strong><%= t("film.genre")%></strong>
+    <%= @film.genre.name %><br>
+    <strong><%= t("film.ratings")%></strong>
+    <%= @film.ratings %><br>
+    <br><strong><%= t("film.discription")%></strong>
+    <%= @film.discription %><br>
+    <%if @film.video_url%>
+      <br><iframe src="<%=@film.video_url%>" width="607" height="360" frameborder="0"></iframe>
+    <%end%>
+    <div class="row">
+      <%if current_user.has_selected_film(@film)%>
+        <% @selected_film = current_user.has_selected_film(@film) %>
+        <div class="col-md-3"><%= button_to t("button.unselect"), selected_film_path(@selected_film, film_id: @film.id), method: :delete, :class => "btn btn-primary" %></div>
+      <%else%>
+        <div class="col-md-3"><%= button_to t("button.select"), film_selected_films_path(@film, selected_film_watched: false), :class => "btn btn-primary" %></div>
+      <%end%>
+      <% @selected_film = current_user.has_selected_watched(@film) %>
+      <%if @selected_film%>
+        <div class="col-md-3"><%= button_to t("button.unmark"), film_selected_film_path(@film, @selected_film), :class => "btn btn-primary", method: :put %></div>
+      <%else%>
+        <div class="col-md-3"><%= button_to t("button.mark"), film_selected_films_path(@film, selected_film_watched: true), :class => "btn btn-primary" %></div>
+      <%end%>
+    </div>
+  </div>
+<div class="col-md-4"><%= image_tag(@film.image_url) %><br></div>
+</div>
+<%if user_signed_in?%>
+  <% comment = @film.comment_for(current_user)%>
+  <%if comment%>
+    <br><dt><%= t("film.comment")%></dt>
+    <%= form_for [@film, comment] do |f| %>
+      <div class="form-group">
+        <div class="col-lg-10">
+          <%= f.text_area :body, :class => "form-control"%><br>
+        </div>
+        <div>
+          <%= f.submit :class => "btn btn-primary" %>
+        </div>
+      </div>  
+    <%end%>
+  <%else%>
+    <%= form_for [@film, Comment.new] do |f| %>
+      <div class="form-group">
+        <div class="col-lg-10">
+          <br><%= f.text_area :body, :class => "form-control"%><br>
+        </div>
+        <div>
+          <br><%= submit_tag "Add comment", :class => "btn btn-primary"%>
+        </div>
+      </div>
+    <%end%>
+  <%end%>  
+<%end%>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @film.genre_id %>
-</p>
 
-<p>
-  <strong>Ratings:</strong>
-  <%= @film.ratings %>
-</p>
-
-<p>
-  <strong>Discription:</strong>
-  <%= @film.discription %>
-</p>
-
-<%= link_to 'Edit', edit_film_path(@film) %> |
-<%= link_to 'Back', films_path %>

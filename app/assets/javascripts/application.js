@@ -10,8 +10,21 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require bootstrap-wysihtml5
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
+//= require_self
+
+function init(){
+  $('.film_with_comment').popover({trigger:"hover"});
+  $("body").on("ajax:success", '.film_watch_link', function(event, data) {
+    $('.main-container').html(data)
+    $('.film_with_comment').popover({trigger:"hover"});
+  });
+}
+
+$(function(){
+  init();
+});

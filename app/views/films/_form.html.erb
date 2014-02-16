@@ -1,15 +1,62 @@
-<%= simple_form_for(@film) do |f| %>
-  <%= f.error_notification %>
+<%= form_for(@film, :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @film.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><%= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h4>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :year %>
-    <%= f.input :genre_id %>
-    <%= f.input :ratings %>
-    <%= f.input :discription %>
+      <ul>
+      <% @film.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => "form-control" %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <%= f.label :image_url, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_field :image_url, :class => "form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+    <%= f.label :video_url, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_field :video_url, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :year, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.number_field :year, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :genre_id, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.select :genre_id, Genre.all.collect{|el| [el.name, el.id]}, {include_blank: true}, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :ratings, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.number_field :ratings, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :discription, :class => "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_area :discription, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

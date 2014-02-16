@@ -28,6 +28,7 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       if @film.save
+        FilmMailer.new(@film, current_user).deliver
         format.html { redirect_to @film, notice: 'Film was successfully created.' }
         format.json { render action: 'show', status: :created, location: @film }
       else
@@ -61,6 +62,10 @@ class FilmsController < ApplicationController
     end
   end
 
+  def search
+    @films_s = Film.search params[:search]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
@@ -69,6 +74,6 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:title, :year, :genre_id, :ratings, :discription)
+      params.require(:film).permit(:title, :video_url, :image_url, :year, :genre_id, :ratings, :discription)
     end
 end

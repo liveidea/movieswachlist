@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  film:
+    poster: "Poster:"
+    title: "Title:"
+    year: "Year:"
+    discription: "Discription:"
+    ratings: "Rating:"
+    genre: "Genre:"
+    comment: "Comment:"
+    add_coment: "Add comment"
+    upd_coment: "Update comment"
+  genre:
+    name: "Name:"
+  button:
+    unmark: "Unwatched"
+    mark: "Wathed"
+    select: "Select film"
+    unselect: "Delete from selected"

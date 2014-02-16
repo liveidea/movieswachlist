@@ -1,49 +1,15 @@
 require 'test_helper'
+include Devise::TestHelpers
 
 class FilmsControllerTest < ActionController::TestCase
-  setup do
-    @film = films(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:films)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
 
   test "should create film" do
+    sign_in User.first
     assert_difference('Film.count') do
-      post :create, film: { discription: @film.discription, genre_id: @film.genre_id, ratings: @film.ratings, title: @film.title, year: @film.year }
+      post :create, film: {title: 'Test', genre_id: 1, ratings: 10, discription: "test discription", year: 1988}
     end
-
     assert_redirected_to film_path(assigns(:film))
+    assert_equal 'Film was successfully created.', flash[:notice]
   end
 
-  test "should show film" do
-    get :show, id: @film
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @film
-    assert_response :success
-  end
-
-  test "should update film" do
-    patch :update, id: @film, film: { discription: @film.discription, genre_id: @film.genre_id, ratings: @film.ratings, title: @film.title, year: @film.year }
-    assert_redirected_to film_path(assigns(:film))
-  end
-
-  test "should destroy film" do
-    assert_difference('Film.count', -1) do
-      delete :destroy, id: @film
-    end
-
-    assert_redirected_to films_path
-  end
 end
