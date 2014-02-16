@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 ruby '2.1.0'
+gem "heroku", "~> 3.3.0"
 gem 'kaminari'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'bootstrap-wysihtml5-rails'
 gem 'bootstrap-generators'
-gem 'bootstrap3-kaminari-views', git: "git@github.com:WilliamZang/bootstrap3-kaminari-views.git"
 gem 'rails', '4.0.2'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
