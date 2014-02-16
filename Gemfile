@@ -19,6 +19,7 @@ gem 'devise'
 gem 'figaro'
 gem 'mysql2'
 gem 'simple_form'
+gem 'pg'
 gem 'therubyracer', :platform=>:ruby
 group :development do
   gem 'quiet_assets'
