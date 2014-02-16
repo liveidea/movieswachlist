@@ -1,0 +1,11 @@
+<%comment = sf.film.comment_for(current_user)%>
+<%tip_data = comment ? {toggle: "tooltip", placement: "top", content: sf.film.comment_for(current_user).body} : {}%>
+<div class="col-md-2">
+  <%= link_to image_tag(sf.film.image_url), sf.film, class: "film_with_comment", data: tip_data%>
+  <%if sf.watched%>
+  <%=link_to t("button.unmark"), watched_status_film_selected_film_path(sf.film, sf), class: "btn btn-primary film_watch_link", remote: true, data:{type: :html}, method: :post%>
+  <%else%>
+    <%=link_to t("button.mark"), watched_status_film_selected_film_path(sf.film, sf), class: "btn btn-primary film_watch_link", remote: true, data:{type: :html}, method: :post%>
+  <%end%>
+  <%= link_to "X", destroy_ajax_film_selected_film_path(sf.film, sf), method: :post, :class => "btn btn-primary film_watch_link margin", remote: true, data:{type: :html} %>
+</div>

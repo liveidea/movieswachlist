@@ -1,0 +1,24 @@
+<h1>Selected films:</h1>
+<h3>Film to watch:</h3>
+<%if current_user.selected_films.to_watch.any?%>
+  <div class="row films-list">
+    <%-current_user.selected_films.to_watch.each do |sf|%>
+        <%=render "s", sf: sf%>
+    <%end%>
+  </div>
+<%else%>
+  <h4>You haven't selected films</h4>
+<%end%> 
+<h3>Watched films:</h3>
+<%if current_user.selected_films.watched.any?%>
+  <div class="row films-list">
+    <%-current_user.selected_films.watched.each do |sf|%>
+        <%=render "s", sf: sf%>
+    <%end%>
+  </div>
+<%else%>
+  <h4>You haven't watched films</h4>
+<%end%> 
+<script>
+init();
+</script>

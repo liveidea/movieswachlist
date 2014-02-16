@@ -1,0 +1,8 @@
+<h2>Search result:</h2>
+<%if @films_s.any?%>
+	<% @films_s.each do |f| %>
+		<h4><%= link_to highlight(f.title, params[:search]), f%></h4><br>
+	<%end%>
+<%else%>
+	<h4><%="No records match"%></h4>
+<%end%>

@@ -1,0 +1,18 @@
+uk:
+  film:
+    poster: "Постер:"
+    title: "Назва:"
+    year: "Рік:"
+    discription: "Опис:"
+    ratings: "Оцінка:"
+    genre: "Жанр:"
+    comment: "Коментар:"
+    add_coment: "Додати коментар"
+    upd_coment: "Обновити коментар"
+  genre:
+    name: "Назва:"
+  button:
+    unmark: "Не переглянуто"
+    mark: "Переглянуто"
+    select: "Вибрати фільм"
+    unselect: "Видалити з вибраного"

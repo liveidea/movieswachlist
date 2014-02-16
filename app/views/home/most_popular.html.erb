@@ -1,0 +1,21 @@
+<h3>Most popular films:<h3>
+<%i=0%>
+<div class="table">
+  <table class="table">
+    <thead>
+      <tr>
+            <th>#</th> 
+            <th>Title</th>
+            <th>Popularity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @sorted_films) do |film| %>
+            <td><%=i+=1%></td>
+            <td><%= link_to film.title, film%></td>
+            <td><%= film.popularity %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
