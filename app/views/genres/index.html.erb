@@ -13,11 +13,9 @@
     <thead>
       <tr>
         <th>Name</th>
-        <%if current_user%>
-          <%if current_user.admin?%>
-            <th></th>
-            <th></th>
-          <%end%>
+        <%if current_user.try(:admin?)%>
+          <th></th>
+          <th></th>
         <%end%>
       </tr>
     </thead>
@@ -25,11 +23,9 @@
     <tbody>
       <%= content_tag_for(:tr, @genres) do |genre| %>
         <td><%= link_to genre.name, genre %></td>
-        <%if current_user%>
-          <%if current_user.admin?%>
-            <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
-            <td><%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <%end%>
+        <%if current_user.try(:admin?)%>
+          <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
+          <td><%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%end%>
       <% end %>
     </tbody>
